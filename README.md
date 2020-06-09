@@ -1,2 +1,2 @@
-# Spring.Authentication
+# ClothingStoreFranchise.Spring.Authentication
 Manages user authentication.
