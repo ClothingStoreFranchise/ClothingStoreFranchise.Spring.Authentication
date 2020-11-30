@@ -13,12 +13,10 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import clothingstorefranchise.spring.authentication.dto.event.RegisterUserEvent;
-
-@Configuration
+//@Configuration
 public class RabbitMqConfig {
 	
-	public static final String DEAD_LETTER_EXCHANGE = "dead_letter";
+	/*public static final String DEAD_LETTER_EXCHANGE = "dead_letter";
 	
     public static final String EXCHANGE_NAME = "event_bus";
     
@@ -49,17 +47,12 @@ public class RabbitMqConfig {
     Queue parkinglotQueue() {
         return new Queue(PARKINGLOT_QUEUE);
     }
-
-    @Bean
-    Binding primaryBinding() {
-        return BindingBuilder.bind(primaryQueue()).to(exchange()).with(RegisterUserEvent.class.getSimpleName());
-    }
-    
-    @Bean
+    */
+    /*@Bean
     Binding secondaryBinding() {
     	return BindingBuilder.bind(primaryQueue()).to(exchange()).with("abab");
-    }
-
+    }*/
+/*
     @Bean
     Binding parkingBinding() {
         return BindingBuilder.bind(parkinglotQueue()).to(deadLetterExchange()).with(PARKINGLOT_QUEUE);
@@ -75,4 +68,5 @@ public class RabbitMqConfig {
 		rabbitTemplate.setMessageConverter(jsonMessageConverter());
 		return rabbitTemplate;
 	}
+	*/
 }

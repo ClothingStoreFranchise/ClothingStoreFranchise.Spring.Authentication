@@ -13,7 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("user-jwt")
 @Api(value = "Endpoints to manage User´s information available in the token")
 public class UserInfoController {
 	@GetMapping(path = "info")

@@ -19,7 +19,7 @@ public class AuthIntegrationEventLogService implements IAuthIntegrationEventLogS
 	private IIntegrationEventLogService inEventLogService;
 		
 	public void publishEventsThroughEventBus(IntegrationEvent event) {
-
+/*
 		try {
 			//logs
 			inEventLogService.putEventAsInProgress(event.getEventId());
@@ -27,7 +27,7 @@ public class AuthIntegrationEventLogService implements IAuthIntegrationEventLogS
 			inEventLogService.putEventAsPublished(event.getEventId());
 		}catch(Exception e) {
 			inEventLogService.putEventAsFailed(event.getEventId());
-		}
+		}*/
 	}
 	
 	public void saveIntegrationEventLog(IntegrationEvent event) {

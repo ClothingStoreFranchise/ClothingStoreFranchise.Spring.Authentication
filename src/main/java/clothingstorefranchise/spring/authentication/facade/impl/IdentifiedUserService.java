@@ -6,56 +6,45 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import clothingstorefranchise.spring.authentication.dto.IdentifiedUserDto;
-import clothingstorefranchise.spring.authentication.dto.event.RegisterUserEvent;
+import clothingstorefranchise.spring.authentication.dtos.IdentifiedUserDto;
 import clothingstorefranchise.spring.authentication.facade.IIdentifiedUserService;
 import clothingstorefranchise.spring.authentication.model.IdentifiedUser;
 import clothingstorefranchise.spring.authentication.repositories.IIdentifiedUserRepository;
+import clothingstorefranchise.spring.common.exceptions.EntityAlreadyExistsException;
 
 @Service
-public class IdentifiedUserService implements IIdentifiedUserService{
-
-	private IIdentifiedUserRepository identifiedUserRepository;
-	private ModelMapper modelMapper;
-	
+public class IdentifiedUserService extends BaseService<IdentifiedUser, Long, IIdentifiedUserRepository> implements IIdentifiedUserService{
+		
 	@Autowired
 	public IdentifiedUserService(IIdentifiedUserRepository identifiedUserRepository, ModelMapper modelMapper) {
-		this.identifiedUserRepository = identifiedUserRepository;
-		this.modelMapper = modelMapper;
+		super(IdentifiedUser.class, identifiedUserRepository);
 	}
 	
-	@Override
 	public IdentifiedUserDto getIdentifiedUserByUsername(String username) {
 
-		IdentifiedUser identifiedUser = identifiedUserRepository.findByUsername(username);
+		IdentifiedUser identifiedUser = repository.findByUsername(username);
 		return modelMapper.map(identifiedUser, IdentifiedUserDto.class);
 	}
 
 	@Override
-	public void create(RegisterUserEvent registerUserEvent) {
-		String encryptedPass = new BCryptPasswordEncoder().encode(registerUserEvent.getPassword());
-		registerUserEvent.setPassword(encryptedPass);
-		IdentifiedUser identifiedUser = modelMapper.map(registerUserEvent, IdentifiedUser.class);
-		identifiedUserRepository.save(identifiedUser);
-	}
-
-	@Override
-	public void update(IdentifiedUserDto identifiedUserDto) {
-		// TODO Auto-generated method stub
+	public IdentifiedUserDto create(IdentifiedUserDto userDto){
+		if(checkIfUsernameExists(userDto.getUsername())) {
+			throw new EntityAlreadyExistsException(
+		              "There is an account with that username: " 
+		              + userDto.getUsername());
+		}
 		
-	}
-
-	@Override
-	public void delete(String username) {
-		// TODO Auto-generated method stub
+		String encryptedPass = new BCryptPasswordEncoder().encode(userDto.getPassword());
+		IdentifiedUser identifiedUser = modelMapper.map(userDto, IdentifiedUser.class);
+		identifiedUser.setPassword(encryptedPass);
+		repository.save(identifiedUser);
 		
+		return modelMapper.map(identifiedUser, IdentifiedUserDto.class);
 	}
-
-	@Override
-	public Collection<IdentifiedUserDto> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private boolean checkIfUsernameExists(String username) {
+		return repository.findByUsername(username) != null;
 	}
-
 }

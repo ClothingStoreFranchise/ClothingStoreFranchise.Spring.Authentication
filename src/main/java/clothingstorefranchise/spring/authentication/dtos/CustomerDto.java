@@ -1,4 +1,4 @@
-package clothingstorefranchise.spring.authentication.dto;
+package clothingstorefranchise.spring.authentication.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
