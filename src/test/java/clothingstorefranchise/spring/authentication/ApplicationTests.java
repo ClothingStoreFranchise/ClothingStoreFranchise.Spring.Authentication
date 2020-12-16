@@ -13,7 +13,7 @@ class ApplicationTests {
 	
 	@Test
 	public void test() {
-		System.out.println(new BCryptPasswordEncoder().encode("devdojo"));
+		System.out.println(new BCryptPasswordEncoder().encode("admin"));
 	}
 
 }

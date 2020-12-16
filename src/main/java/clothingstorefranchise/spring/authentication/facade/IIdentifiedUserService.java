@@ -1,14 +1,12 @@
 package clothingstorefranchise.spring.authentication.facade;
 
-import java.util.Collection;
-
 import clothingstorefranchise.spring.authentication.dtos.IdentifiedUserDto;
 
 public interface IIdentifiedUserService {
 	
 	IdentifiedUserDto getIdentifiedUserByUsername(String username);
 	
-	IdentifiedUserDto create(IdentifiedUserDto registerUserEvent);
+	IdentifiedUserDto create(IdentifiedUserDto user);
 			
 	void delete(Long id);
 }
