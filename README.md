@@ -1,4 +1,4 @@
-# ClothingStoreFranchise.Spring.Authentication
+# ClothingStoreFranchise: Authentication Microservice
 
 **Description**
 ----------------
