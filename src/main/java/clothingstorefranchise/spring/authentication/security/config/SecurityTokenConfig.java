@@ -2,13 +2,10 @@ package clothingstorefranchise.spring.authentication.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import clothingstorefranchise.spring.common.constants.Rol;
 import clothingstorefranchise.spring.common.security.config.JwtConfiguration;
@@ -51,7 +48,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(jwtConfiguration.getLoginUrl(), "/**/swagger-ui.html").permitAll()
                 .antMatchers(HttpMethod.GET, "/**/swagger-resources/**", "/**/webjars/springfox-swagger-ui/**", "/**/v2/api-docs/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/user/**").hasAnyRole(Rol.CUSTOMER,Rol.ADMIN)
+                .antMatchers(HttpMethod.GET,"/user/**").hasAnyRole(Rol.CUSTOMER,Rol.ADMIN, Rol.WAREHOUSE_EMPLOYEE, Rol.SHOP_EMPLOYEE)
                 .antMatchers(HttpMethod.POST,"/user/**").permitAll()
                 .anyRequest().authenticated();
         }
