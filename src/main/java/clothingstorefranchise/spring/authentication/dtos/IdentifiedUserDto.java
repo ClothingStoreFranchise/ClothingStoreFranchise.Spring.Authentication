@@ -11,21 +11,17 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class IdentifiedUserDto extends AbstractExtensibleEntityDto implements IEntityDto<String>{
-	@Getter
-	@Setter
+
 	private Long id;
 	
-	@Getter
-	@Setter
 	private String username;
 	
-	@Getter
-	@Setter
     private String role;
-    
-	@Getter
+
     private String password;
 
 	@Override

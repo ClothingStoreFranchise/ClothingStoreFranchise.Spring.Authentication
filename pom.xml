@@ -6,6 +6,7 @@
 		<groupId>ClothingStoreFranchise</groupId>
 	  	<artifactId>common</artifactId>
 	  	<version>1.0.8</version>
+	  	<relativePath>..\..\..\..\Spring.Common\common-lib\src\main\resources </relativePath>
 	</parent>
 	
 	<artifactId>authentication</artifactId>

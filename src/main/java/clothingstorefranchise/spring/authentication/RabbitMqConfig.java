@@ -13,16 +13,16 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 public class RabbitMqConfig {
 	
-	/*public static final String DEAD_LETTER_EXCHANGE = "dead_letter";
+	public static final String DEAD_LETTER_EXCHANGE = "dead_letter";
 	
     public static final String EXCHANGE_NAME = "event_bus";
     
 	public static final String QUEUE = "authentication";
 
-    private static final String PARKINGLOT_QUEUE = QUEUE + ".parkingLot";
+    //private static final String PARKINGLOT_QUEUE = QUEUE + ".parkingLot";
 
     
     @Bean
@@ -34,7 +34,7 @@ public class RabbitMqConfig {
     DirectExchange exchange() {
         return new DirectExchange(EXCHANGE_NAME);
     }
-
+/*
     @Bean
     Queue primaryQueue() {
         return QueueBuilder.durable(QUEUE)
@@ -57,7 +57,7 @@ public class RabbitMqConfig {
     Binding parkingBinding() {
         return BindingBuilder.bind(parkinglotQueue()).to(deadLetterExchange()).with(PARKINGLOT_QUEUE);
     }
-    
+  */  
     @Bean
 	public MessageConverter jsonMessageConverter() {
 		return new Jackson2JsonMessageConverter();
@@ -68,5 +68,4 @@ public class RabbitMqConfig {
 		rabbitTemplate.setMessageConverter(jsonMessageConverter());
 		return rabbitTemplate;
 	}
-	*/
 }

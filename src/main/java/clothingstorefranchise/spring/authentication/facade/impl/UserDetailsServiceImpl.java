@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import clothingstorefranchise.spring.authentication.model.IdentifiedUser;
 import clothingstorefranchise.spring.authentication.repositories.IIdentifiedUserRepository;
+import clothingstorefranchise.spring.common.exceptions.EntityDoesNotExistException;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -27,12 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         log.info("Searching in the DB the user by username '{}'", username);
 
-        IdentifiedUser user = applicationUserRepository.findByUsername(username);
+        IdentifiedUser user = applicationUserRepository.findByUsername(username).
+        		orElseThrow(() -> new UsernameNotFoundException(String.format("Application user '%s' not found", username)));
 
         log.info("IdentifiedUser found '{}'", user);
-
-        if (user == null)
-            throw new UsernameNotFoundException(String.format("Application user '%s' not found", username));
 
         return new CustomUserDetails(user);
     }

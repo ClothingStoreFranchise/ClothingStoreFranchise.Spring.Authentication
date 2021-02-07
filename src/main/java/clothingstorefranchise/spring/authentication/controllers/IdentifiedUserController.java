@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import clothingstorefranchise.spring.authentication.dtos.IdentifiedUserDto;
 import clothingstorefranchise.spring.authentication.facade.IIdentifiedUserService;
@@ -38,7 +39,7 @@ public class IdentifiedUserController {
 	@ApiOperation(value= "Will register a new user account")
 	public ResponseEntity<IdentifiedUserDto> create(@Valid @RequestBody IdentifiedUserDto identifiedUserDto) {
 
-		return ResponseEntity.ok(identifiedUserService.create(identifiedUserDto));
+		return new ResponseEntity<>(identifiedUserService.create(identifiedUserDto), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -46,6 +47,4 @@ public class IdentifiedUserController {
 		identifiedUserService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
 }
